@@ -40,6 +40,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 )
 
+PROJECT_APPS = (
+    'apps.core',
+    'apps.users',
+)
+
+INSTALLED_APPS += PROJECT_APPS
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
