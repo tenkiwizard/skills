@@ -18,10 +18,10 @@
 .DS_Store
 ._.DS_Store
 
+db.sqlite3
 *.db
 *.log
 doc/sphinx/build/
-env/
 venv/
 build/
 
