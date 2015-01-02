@@ -90,3 +90,63 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# ログ設定 TODO: 要精査
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'standard': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s [%(pathname)s] %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        # メール送信する
+        # DEBUG = False の場合は無視する
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        # メール送信する
+        # DEBUG = False の場合でも送る
+        "debug_mail_admins": {
+            "level": "ERROR",
+            "class": "apps.core.log.handlers.AdminEmailHandler"
+        },
+        'stream': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'app': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/app.log',
+            'maxBytes': 1024 * 1024 * 50,  # 50M
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'app': {
+            'handlers': ['app'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    }
+}
