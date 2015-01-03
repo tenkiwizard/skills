@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from apps.organizations.models import Organizations
 from apps.core.models import DateTime as AbstractDateTimeModel
 
 class Generals(AbstractDateTimeModel):
@@ -11,6 +12,8 @@ class Generals(AbstractDateTimeModel):
     )
 
     user = models.OneToOneField(User)
+    belongs_to = models.ForeignKey( # フィールド名は`organization(s)`かなあ？
+        Organizations, null=True, blank=True, verbose_name=u'所属')
     birthday = models.DateField(u'生年月日')
     sex = models.SmallIntegerField(u'性別', choices=SEX_CHOICES)
     address = models.CharField(u'住所', max_length=200)
@@ -18,10 +21,10 @@ class Generals(AbstractDateTimeModel):
     note = models.TextField(u'ノート')
 
     def __unicode__(self):
-        return u"<{}> id: {}".format(self.__class__.__name__, self.id)
+        return u'<{}> id: {}'.format(self.__class__.__name__, self.id)
 
     class Meta:
-        verbose_name = verbose_name_plural = u"ユーザー基本情報"
+        verbose_name = verbose_name_plural = u'ユーザー基本情報'
 
 
 class Educations(models.Model):
@@ -34,10 +37,10 @@ class Educations(models.Model):
     note = models.TextField(u'備考')
 
     def __unicode__(self):
-        return u"<{}> id: {}".format(self.__class__.__name__, self.id)
+        return u'<{}> id: {}'.format(self.__class__.__name__, self.id)
 
     class Meta:
-        verbose_name = verbose_name_plural = u"ユーザー学歴情報"
+        verbose_name = verbose_name_plural = u'ユーザー学歴情報'
 
 class Licenses(models.Model):
     user = models.ForeignKey(User)
@@ -48,7 +51,7 @@ class Licenses(models.Model):
     )
 
     def __unicode__(self):
-        return u"<{}> id: {}".format(self.__class__.__name__, self.id)
+        return u'<{}> id: {}'.format(self.__class__.__name__, self.id)
 
     class Meta:
-        verbose_name = verbose_name_plural = u"ユーザー保有資格情報"
+        verbose_name = verbose_name_plural = u'ユーザー保有資格情報'

@@ -43,6 +43,7 @@ INSTALLED_APPS = (
 PROJECT_APPS = (
     'apps.core',
     'apps.profiles',
+    'apps.organizations',
 )
 
 INSTALLED_APPS += PROJECT_APPS
