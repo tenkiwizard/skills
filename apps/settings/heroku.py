@@ -1,6 +1,9 @@
 # coding: utf8
 """
 heroku用設定ファイル
+
+herokuの管理パネルから `Apps` > `Settings` > `Config Variables` に
+`DJANGO_SETTINGS_MODULE=apps.settings.heroku` を追加設定しておくこと
 """
 from apps.settings.base import *  # NOQA
 
