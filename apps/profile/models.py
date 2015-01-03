@@ -21,7 +21,10 @@ class General(AbstractDateTimeModel):
     note = models.TextField(u'ノート')
 
     def __unicode__(self):
-        return u'<{}> id: {}'.format(self.__class__.__name__, self.id)
+        return u'{} {} ({} : {})'.format(
+            self.user.last_name, self.user.first_name,
+            self.organization.name, self.organization.department
+        )
 
     class Meta:
         verbose_name = verbose_name_plural = u'ユーザー基本情報'
@@ -37,7 +40,7 @@ class Education(models.Model):
     note = models.TextField(u'備考')
 
     def __unicode__(self):
-        return u'<{}> id: {}'.format(self.__class__.__name__, self.id)
+        return u'{} (〜{})'.format(self.name, self.graduated_on)
 
     class Meta:
         verbose_name = verbose_name_plural = u'ユーザー学歴情報'
@@ -51,7 +54,7 @@ class License(models.Model):
     )
 
     def __unicode__(self):
-        return u'<{}> id: {}'.format(self.__class__.__name__, self.id)
+        return u'{} ({})'.format(self.name, self.took_on)
 
     class Meta:
         verbose_name = verbose_name_plural = u'ユーザー保有資格情報'
