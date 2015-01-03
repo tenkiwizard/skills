@@ -119,12 +119,6 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
-        # メール送信する
-        # DEBUG = False の場合でも送る
-        "debug_mail_admins": {
-            "level": "ERROR",
-            "class": "apps.core.log.handlers.AdminEmailHandler"
-        },
         'stream': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
