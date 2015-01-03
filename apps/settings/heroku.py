@@ -7,4 +7,4 @@ from apps.settings.base import *  # NOQA
 import dj_database_url
 DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
-INSTALLED_APPS += ('gunicorn')
+INSTALLED_APPS += ('gunicorn', )
